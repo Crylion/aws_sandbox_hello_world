@@ -1,0 +1,17 @@
+{
+  "name": "aws-hello-world",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "pm2 start ./server.js --name aws-hello-world --log ../logs/app.log",
+    "stop": "pm2 stop aws-hello-world",
+    "build": "echo 'Building...'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "pm2": "^4.5.6"
+  }
+}
