@@ -3,7 +3,12 @@ STACK_NAME=aws-hello-world
 REGION=eu-central-1
 EC2_INSTANCE_TYPE=t2.micro
 PROFILE=helloworld
-AWS_ACCOUNT_ID=`aws sts get-caller-identity --query "Account" --output text`
+AWS_ACCOUNT_ID=`aws sts get-caller-identity --query "Account" --profile helloworld --output text`
+# github access info
+GH_ACCESS_TOKEN=$(cat ~/.github/aws-hello-world-access-token)
+GH_OWNER=$(cat ~/.github/aws-hello-world-owner)
+GH_REPO=$(cat ~/.github/aws-hello-world-repo)
+GH_BRANCH=master
 
 # Deploys static resources
 echo -e "\n\n=========== Deploying setup.yml ==========="
@@ -28,6 +33,11 @@ aws cloudformation deploy \
 	--capabilities CAPABILITY_NAMED_IAM \
 	--parameter-overrides \
 	EC2InstanceType=$EC2_INSTANCE_TYPE
+	GitHubOwner=$GH_OWNER \
+	GitHubRepo=$GH_REPO \
+	GitHubBranch=$GH_BRANCH \
+	GitHubPersonalAccessToken=$GH_ACCESS_TOKEN \
+	CodePipelineBucket=$CODEPIPELINE_BUCKET
 
 # If the deploy succeeded, show the DNS name of the created instance
 if [ $? -eq 0 ]; then
