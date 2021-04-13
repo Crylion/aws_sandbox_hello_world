@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "pm2 start ./server.js --name aws-hello-world --log ../logs/app.log",
-    "stop": "pm2 stop aws-hello-world",
+    "start": "node ./node_modules/pm2/bin/pm2 start ./server.js --name aws-hello-world --log ../logs/app.log",
+    "stop": "node ./node_modules/pm2/bin/pm2 stop aws-hello-world",
     "build": "echo 'Building...'"
   },
   "keywords": [],

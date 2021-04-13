@@ -1,4 +1,3 @@
 #!/bin/bash -xe
 source /home/ec2-user/.bash_profile
-cd /home/ec2-user/app/release
-npm stop
+[ -d "/home/ec2-user/app/release" ] && cd /home/ec2-user/app/release && npm stop
