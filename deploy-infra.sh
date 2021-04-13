@@ -2,8 +2,9 @@
 STACK_NAME=aws-hello-world
 REGION=eu-central-1
 EC2_INSTANCE_TYPE=t2.micro
-PROFILE=helloworld
+CLI_PROFILE=helloworld
 AWS_ACCOUNT_ID=`aws sts get-caller-identity --query "Account" --profile helloworld --output text`
+CODEPIPELINE_BUCKET="$STACK_NAME-$REGION-codepipeline-$AWS_ACCOUNT_ID"
 # github access info
 GH_ACCESS_TOKEN=$(cat ~/.github/aws-hello-world-access-token)
 GH_OWNER=$(cat ~/.github/aws-hello-world-owner)
@@ -32,7 +33,7 @@ aws cloudformation deploy \
 	--no-fail-on-empty-changeset \
 	--capabilities CAPABILITY_NAMED_IAM \
 	--parameter-overrides \
-	EC2InstanceType=$EC2_INSTANCE_TYPE
+	EC2InstanceType=$EC2_INSTANCE_TYPE \
 	GitHubOwner=$GH_OWNER \
 	GitHubRepo=$GH_REPO \
 	GitHubBranch=$GH_BRANCH \
